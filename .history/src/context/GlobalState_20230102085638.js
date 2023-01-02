@@ -25,7 +25,8 @@ export const GlobalProvider = (props) => {
             const id = lists.length + 1;
             const newItem = { id, checked: false, title: addItemInput }
             const newLists = [...lists, newItem]
-            setAndSaveItems(newLists)
+            setLists(newLists)
+            localStorage.setItem("lists", JSON.stringify(newLists))
         }
     }
     return (

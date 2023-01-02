@@ -6,18 +6,19 @@ export const GlobalProvider = (props) => {
     const [lists, setLists] = useState(JSON.parse(localStorage.getItem("lists")));
     const [addItemInput, setAddItemInput] = useState("")
 
-    function setAndSaveItems(newLists){
-        setLists(newLists)
-        localStorage.setItem("lists", JSON.stringify(newLists))
+    function setAndSaveItems(){
+        
     }
     const handleChecked = (id) => {
         const newLists = lists.map((list) => list.id === id ? { ...list, checked: !list.checked } : list)
-        setAndSaveItems(newLists)
+        setLists(newLists)
+        localStorage.setItem("lists", JSON.stringify(newLists))
     }
 
     const handleDelete = (id) => {
         const newLists = lists.filter(list => list.id !== id)
-        setAndSaveItems(newLists)
+        setLists(newLists)
+        localStorage.setItem("lists", JSON.stringify(newLists))
     }
 
     const handleAdding = () => {
@@ -25,7 +26,8 @@ export const GlobalProvider = (props) => {
             const id = lists.length + 1;
             const newItem = { id, checked: false, title: addItemInput }
             const newLists = [...lists, newItem]
-            setAndSaveItems(newLists)
+            setLists(newLists)
+            localStorage.setItem("lists", JSON.stringify(newLists))
         }
     }
     return (
